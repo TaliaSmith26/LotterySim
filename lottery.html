@@ -1,0 +1,160 @@
+<!DOCTYPE html> 
+<html> 
+<head> 
+	<meta name='viewport' content= "width=device-width, initial-scale=1"> 
+
+	<title>LotterySim/title>
+	<link rel="stylesheet" type="text/css" href="lotterystyle.css">
+
+</head>
+
+<body>
+
+	<h1>Lottery Number Generator</h1>
+
+	<br>
+	<br>
+	<br>
+  	<!-- <p>Note: refresh the page or click the button below to generate lottery numbers!</p> --> 
+  	<br>
+  	<br>
+  
+  
+
+	<p id = "numbers"> </p>
+
+	<button type="button" onClick="refreshPage()">Generate</button>
+	
+	<script language= "javascript">
+
+		function refreshPage(){
+    		window.location.reload();
+		} 
+		document.write("<br>");
+		document.write("<br>");
+		document.write("<br>");
+		document.write("<br>");
+
+		// first pick array, unique numbers 
+		var numbers = [];
+		while(numbers.length < 5){
+		    var pick = Math.floor(Math.random() * 48) + 1;
+		    if(numbers.indexOf(pick) === -1) numbers.push(pick);
+		}
+		document.write("My pick: " + numbers.join(" - ")); 
+
+
+		// push lucky ball number into end of array 
+		var lucky = Math.floor(Math.random()*18) + 1; 
+		numbers.push(lucky);
+		document.write(", and lucky " + lucky); 
+		document.write("<br>");
+
+
+		// sort numbers 
+		//var sorting = numbers.sort(function(a, b){return a-b});
+		numbers.sort(function(a, b){return a-b});
+
+		//var lastSorting = sorting[sorting.length - 1];
+		//var sortNoLucky = numbers.slice(-5); 
+		// displaying sorted numbers 
+		document.write("<br>"); 
+		document.write("My pick sorted: " + numbers.join(" - ") + ", and lucky " + lucky); 
+		document.write("<br>");
+
+
+		// display winning numbers 
+		var lottoNumbers = [12, 15, 24, 35, 48, 3]; 
+		var lottoNoLucky = lottoNumbers.slice(0,5); 
+		//last num 
+		var luckyLotto = lottoNumbers[lottoNumbers.length -1]; 
+		document.write("<br>"); 
+		document.write("Winning numbers: " + lottoNoLucky.join(" - ") + ", and lucky " +luckyLotto); 
+
+
+		document.write("<br>"); 
+
+		// array matching function 
+		function arrayMatch(arr1, arr2) {
+		    var arr = [];
+		    arr1 = arr1.toString().split(',').map(Number);
+		    arr2 = arr2.toString().split(',').map(Number);
+		    console.log(arr1);
+		    // for array1
+		    for (var i in arr1) {
+		       if(arr2.indexOf(arr1[i]) !== -1)
+		       arr.push(arr1[i]);
+		    }
+	    	console.log(arr);
+	 
+	    	return arr.sort((x,y) => x-y);
+	 	}
+
+
+	 	// comparing first pick to winning numbers, calling matching function  
+			//useful to make sure correct--> document.write(arrayMatch(numbers, lottoNumbers).join(", ")); 
+		var numMatches = (arrayMatch(numbers, lottoNumbers)).length; 
+		document.write(" <br> Numbers matching: " + numMatches); 
+
+		document.write("<br>"); 
+
+		//comparing lucky balls 
+		if (lucky.length == luckyLotto.length) {
+			var luckyBallMatches = (arrayMatch(lucky, luckyLotto )).length;
+		    document.write(" <br> Lucky ball matches: " + luckyBallMatches); 
+		 }
+		
+		document.write("<br>"); 
+		document.write("<br>"); 
+
+		 // calculate winnings
+
+		 if (numMatches == 5 && luckyBallMatches == 1) {
+		 	document.write("Your winnings: $7,000 a WEEK for LIFE" ); 
+		 } else if (numMatches == 5 && luckyBallMatches == 0) { 
+		 	document.write("Your winnings: $25,000 a YEAR for LIFE" ); 
+		 } else if (numMatches == 4 && luckyBallMatches == 1) { 
+		 	document.write("Your winnings: $5,000" ); 
+		 } else if (numMatches == 4 && luckyBallMatches == 0) { 
+		 	document.write("Your winnings: $200" ); 
+		 } else if (numMatches == 3 && luckyBallMatches == 1) { 
+		 	document.write("Your winnings: $150" ); 
+		 } else if (numMatches == 3 && luckyBallMatches == 0) { 
+		 	document.write("Your winnings: $20" ); 
+		 } else if (numMatches == 2 && luckyBallMatches == 1) { 
+		 	document.write("Your winnings: $25" ); 
+		 } else if (numMatches == 2 && luckyBallMatches == 0) { 
+		 	document.write("Your winnings: $3" ); 
+		 } else if (numMatches == 1 && luckyBallMatches == 1) { 
+		 	document.write("Your winnings: $6" ); 
+		 } else if (numMatches == 1 && luckyBallMatches == 0) { 
+		 	document.write("Your winnings: $0" ); 
+		 } else if(numMatches == 0 && luckyBallMatches == 1) { 
+		 	document.write("Your winnings: $4" ); 
+		 } else if(numMatches == 0 && luckyBallMatches == 0) { 
+		 	document.write("Your winnings: $0" ); 
+		 }
+
+
+
+	</script>
+
+	<!-- <div style="margin-top:500px"></div> --> 
+
+	<br>
+ 	<br>
+ 	<br>
+ 	<br>
+ 	<br>
+ 	<br>
+ 	<br>
+ 	<br>
+ 	<br>
+ 	<footer>
+            Copyright &copy; 2022 Lottery Number Generator
+    </footer>
+
+</body>
+
+</html>
+
