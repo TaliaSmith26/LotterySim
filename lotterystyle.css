@@ -39,7 +39,10 @@ footer {
 	font-weight: normal;
 	font-size: 10px;
 	color: darkgrey;
+
 	margin-bottom: -30px;
+	height: 2%;
+	bottom: 0;
 }
 
 button{
